@@ -1,0 +1,39 @@
+---
+
+circlejh_equipment:
+  mowers:
+    - type: "Tractor with bat-wing shredder"
+      min_acres: 100
+      max_acres: 1000
+      min_grass_height: 0
+      max_grass_height: 36
+      day_cost: 500
+      week_cost: 2000
+      acres_per_hour: 8
+      labor_type: operator
+    - type: "Tractor with shredder"
+      min_acres: 0
+      max_acres: 99
+      min_grass_height: 0
+      max_grass_height: 36
+      day_cost: 330
+      week_cost: 990
+      acres_per_hour: 5
+      labor_type: operator
+    - type: "Zero turn"
+      min_acres: 0
+      max_acres: 2
+      min_grass_height: 0
+      max_grass_height: 6
+      day_cost: 100
+      week_cost: 450
+      acres_per_hour: 1
+      labor_type: operator
+  truck_and_tool_trailer:
+    day_cost: 100
+    week_cost: 450
+  truck_and_equipment_trailer:
+    day_cost: 100
+    week_cost: 450
+
+...

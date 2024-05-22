@@ -1,0 +1,8 @@
+---
+
+working_day_hours: 8
+
+labor:
+  operator: 50
+
+...
