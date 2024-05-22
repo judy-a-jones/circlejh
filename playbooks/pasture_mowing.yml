@@ -1,7 +1,7 @@
 ---
 
-- hosts: localhost
-  connection: local
+- hosts: all
+  gather_facts: false
   vars:
     name: "Andy Huffman"
     email: "circlejh@outlook.com"
@@ -24,7 +24,7 @@
             {{ mower }}
               {%- endif -%}
             {%- endfor -%}
-          truck_and_equipment_trailer: "{{ equipment.truck_and_equipment_trailer }}"
+          truck_and_equipment_trailer: "{{ circlejh_equipment.truck_and_equipment_trailer }}"
 
     - debug:
         msg: "{{ equipment }}"
@@ -32,9 +32,9 @@
     - name: Figure out time line
       set_fact:
         project:
-          hours: {%- acres / equipment.mower.acres_per_hour | round | ceil | int -%}
-          days: {%- projecthours / working_day_hours | round | ceil | int -%}
-          weeks: {%- projectdays / 5 | round | ceil | int -%}
+          hours: "{{ acres / equipment.mower.acres_per_hour | round | ceil | int }}"
+          days: "{{ projecthours / working_day_hours | round | ceil | int }}"
+          weeks: "{{ projectdays / 5 | round | ceil | int }}"
 
     - debug:
         msg: "{{ project }}"
@@ -57,15 +57,15 @@
               "total": total 
               } -%}
             {{ equipment_cost }}" 
-        equipment_burden: {%- set equipment_burden = burden * equipment_cost -%}
-        equipment_margin: {%- set equipment_margin = (equipment_cost + equipment_burden) * equipment_margin -%}
-        total_equipment_cost: {%- set total_equipment_cost = equipment_cost + equipment_burden + equipment_margin -%}
-        labor_cost: {%- set labor_cost = project_hours * labor[equipment.mower.labor_type] -%}
-        labor_burden: {%- set labor_burden = burden * labor_cost -%}
-        labor_margin: {%- set labor_margin = (labor_cost + labor_burden) * labor_margin -%}
-        total_labor_cost: {%- set total_labor_cost = labor_cost + labor_burden + labor_margin -%}
-        sales_tax_cost: {%- set sales_tax_cost = (total_equipment_cost + total_labor_cost) * sales_tax -%}
-        total_cost: {%- set total_cost = total_equipment_cost + total_labor_cost + sales_tax_cost -%}
+        equipment_burden: "{{ set equipment_burden = burden * equipment_cost }}"
+        equipment_margin: "{{ set equipment_margin = (equipment_cost + equipment_burden) * equipment_margin }}"
+        total_equipment_cost: "{{ set total_equipment_cost = equipment_cost + equipment_burden + equipment_margin }}"
+        labor_cost: "{{ set labor_cost = project_hours * labor[equipment.mower.labor_type] }}"
+        labor_burden: "{{ set labor_burden = burden * labor_cost }}"
+        labor_margin: "{{ set labor_margin = (labor_cost + labor_burden) * labor_margin }}"
+        total_labor_cost: "{{ set total_labor_cost = labor_cost + labor_burden + labor_margin }}"
+        sales_tax_cost: "{{ set sales_tax_cost = (total_equipment_cost + total_labor_cost) * sales_tax }}"
+        total_cost: "{{ set total_cost = total_equipment_cost + total_labor_cost + sales_tax_cost }}"
 
     - debug:
         msg: "{{ cost }}" 
