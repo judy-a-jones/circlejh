@@ -1,0 +1,30 @@
+---
+
+- hosts: localhost
+  connection: local
+  vars:
+    name: "Andy Huffman"
+    email: "circlejh@outlook.com"
+    phone: "8324706635"
+    postal_code: 77423
+    acres: 2
+    height: 12
+    trash: no
+    dry: yes
+    timeline: ASAP
+
+  tasks:
+    - name: Figure out equipment type
+
+    - name: Compute equipment cost
+
+    - name: Figure out hours to complete
+
+    - name: Compute labor cost
+
+    - name: Compute taxes
+
+    - name: Compute total cost
+
+
+...
