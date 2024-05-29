@@ -41,5 +41,17 @@
         src: "{{ playbook_dir }}/../templates/mowing_quote.j2"
         dest: "/tmp/{{ name | replace(' ', '_') }}-mowing-quote.csv"
 
-# Send xls
+    - name: Email quote to circlejh@outlook.com
+      community.general.mail:
+        host: "mailslurp.mx"
+        port: 2465
+        secure: starttls
+        username: ""
+        password: "" 
+        subject: "Automated quote generation for {{ name }}"
+        from: "69733564-13ec-4e6e-8cd0-f392ba01b933@mailslurp.net"
+        body: "Quote csv is attached"
+        to: "circlejh@outlook.com"
+        attach: "/tmp/{{ name | replace(' ', '_') }}-mowing-quote.csv"
+        
 ...
