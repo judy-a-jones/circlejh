@@ -1,0 +1,28 @@
+Name:,{{ name }},,,,,Burden:,{{ burden }}
+Phone:,{{ phone }},,,,,Margin:,{{ margin }}
+Email:,{{ email }},,,,,,
+Zip:,{{ postal_code }},,,,,Timeline:,
+Acres,{{ acres }},,,,,Hours:,{{ project.hours }}
+Grass height in inches:,{{ height }},,,,,Days:,{{ project.days }}
+Trash:,{{ trash }},,,,,Weeks:,{{ project.weeks }}
+Dry:,{{ dry }},,,,,,
+Timeline:,{{ timeline }},,,,,,
+,,,,,,,
+,,,,,,,
+Rates:,,,,,,,
+Equipment:,Day cost:,Week cost:,Notes:,,,,
+{% for entry in lookup('ansible.builtin.dict', equipment) %}
+{{ entry.key }},{{ equipment[entry.key].cost }},,{%- if equipment[entry.key].acres_per_hour is defined -%}Acres per hour: {{ equipment[entry.key].acres_per_hour }}{%- endif -%},,,,
+{% endfor %}
+,,,,,,,
+Labor,Hour cost,,,,,,
+{{ equipment.mower.labor_type }},{{ labor[equipment.mower.labor_type] }},,,,,,
+,,,,,,,
+,,,,,,,
+Totals:,,,,,,,
+Equipment cost:,,,Labor cost,,,Total cost:,
+Item,Cost,,Item,Cost,,Total:,=SUM(B28+E28)
+Cost,=(B14+B15)*H6,,Cost,=B19*H5,,Sales tax,={{ sales_tax }}*H24
+Burden,=H1*B25,,Burden,=H1*E25,,Final total:,=SUM(H24:H25)
+Margin,=(B25+B26)*H2,,Margin,=(E25+E26)*H2,,,
+Total,=SUM(B25:B27),,Total,=SUM(E25:E27),,,

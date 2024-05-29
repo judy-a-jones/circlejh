@@ -14,8 +14,9 @@
     timeline: ASAP
 
   tasks:
-    - name: Figure out equipment
-      set_fact:
+
+    - name: Make quote csv
+      vars:
         equipment:
           mower: |-
             {%- for mower in circlejh_equipment.mowers -%}
@@ -24,10 +25,8 @@
             {{ mower }}
               {%- endif -%}
             {%- endfor -%}
-          truck_and_equipment_trailer: "{{ circlejh_equipment.truck_and_equipment_trailer }}"
-
-    - name: Figure out time line
-      set_fact:
+          truck: "{{ circlejh_equipment.truck }}"
+          equipment_trailer: "{{ circlejh_equipment.trailer.equipment }}"
         project: |-
           {%- set hours = ( acres / equipment.mower.acres_per_hour ) | round(0,'ceil') | int -%}
           {%- set days = ( hours / working_day_hours ) | round(0,'ceil') | int -%}
@@ -38,47 +37,9 @@
             "weeks": weeks
             } -%}
           {{ project }} 
-
-    - name: Figure out costs
-      set_fact: 
-        cost: |-
-          {%- if 0 <= project.days <= 4 -%}
-            {%- set mower = equipment.mower.day_cost * project.days -%}
-            {%- set truck_and_equipment_trailer = equipment.truck_and_equipment_trailer.day_cost * project.days -%}
-          {%- elif project.days >= 5 -%}
-            {%- set mower = equipment.mower.week_cost * project.weeks -%}
-            {%- set truck_and_equipment_trailer = equipment.truck_and_equipment_trailer.week_cost * project.weeks -%}
-          {%- endif -%}
-          {%- set total = mower + truck_and_equipment_trailer -%}
-          {%- set equipment_cost = {
-            "mower": mower,
-            "truck and equipment trailer": truck_and_equipment_trailer,
-            "total": total 
-            } -%}
-          {%- set equipment_burden = burden * equipment_cost.total -%}
-          {%- set equipment_margin = (equipment_cost.total + equipment_burden) * margin -%}
-          {%- set total_equipment_cost = equipment_cost.total + equipment_burden + equipment_margin -%}
-          {%- set labor_cost = project.hours * labor[equipment.mower.labor_type] -%}
-          {%- set labor_burden = burden * labor_cost -%}
-          {%- set labor_margin = (labor_cost + labor_burden) * margin -%}
-          {%- set total_labor_cost = labor_cost + labor_burden + labor_margin -%}
-          {%- set sales_tax_cost = (total_equipment_cost + total_labor_cost) * sales_tax -%}
-          {%- set total_cost = total_equipment_cost + total_labor_cost + sales_tax_cost -%}
-          {%- set cost = {
-            "equipment cost": equipment_cost.total,
-            "equipment burden": equipment_burden,
-            "equipment margin": equipment_margin,
-            "total equipment cost": total_equipment_cost,
-            "labor cost": labor_cost,
-            "labor burden": labor_burden,
-            "labor margin": labor_margin,
-            "total_labor_cost": total_labor_cost,
-            "sales tax": sales_tax_cost,
-            "total": total_cost 
-            } -%}
-          {{ cost }}
-
-# Make xls
+      template:
+        src: "{{ playbook_dir }}/../templates/mowing_quote.j2"
+        dest: "/tmp/{{ name | replace(' ', '_') }}-mowing-quote.csv"
 
 # Send xls
 ...
