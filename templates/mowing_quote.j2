@@ -1,12 +1,11 @@
-Name:,{{ name }},,,,,Burden:,{{ burden }}
-Phone:,{{ phone }},,,,,Margin:,{{ margin }}
-Email:,{{ email }},,,,,,
-Zip:,{{ postal_code }},,,,,Timeline:,
-Acres,{{ acres }},,,,,Hours:,{{ project.hours }}
-Grass height in inches:,{{ height }},,,,,Days:,{{ project.days }}
-Trash:,{{ trash }},,,,,Weeks:,{{ project.weeks }}
-Dry:,{{ dry }},,,,,,
-Timeline:,{{ timeline }},,,,,,
+Name:,{{ email_facts.name }},,,,,Burden:,{{ burden }}
+Phone:,{{ email_facts.phone }},,,,,Margin:,{{ margin }}
+Zip:,{{ email_facts.zip }},,,,,Timeline:,
+Acres,{{ email_facts.acres }},,,,,Hours:,{{ project.hours }}
+Grass height in inches:,{{ email_facts.height }},,,,,Days:,{{ project.days }}
+Trash:,{{ email_facts.trash }},,,,,Weeks:,{{ project.weeks }}
+Dry:,{{ email_facts.dry }},,,,,,
+Timeline:,{{ email_facts.timeline }},,,,,,
 ,,,,,,,
 ,,,,,,,
 Rates:,,,,,,,
@@ -21,8 +20,8 @@ Labor,Hour cost,,,,,,
 ,,,,,,,
 Totals:,,,,,,,
 Equipment cost:,,,Labor cost,,,Total cost:,
-Item,Cost,,Item,Cost,,Total:,=SUM(B28+E28)
-Cost,=(B14+B15)*H6,,Cost,=B19*H5,,Sales tax,={{ sales_tax }}*H24
-Burden,=H1*B25,,Burden,=H1*E25,,Final total:,=SUM(H24:H25)
-Margin,=(B25+B26)*H2,,Margin,=(E25+E26)*H2,,,
-Total,=SUM(B25:B27),,Total,=SUM(E25:E27),,,
+Item,Cost,,Item,Cost,,Total:,=SUM(B27+E27)
+Cost,=(B13+B14)*H5,,Cost,=B18*H4,,Sales tax,={{ sales_tax }}*H23
+Burden,=H1*B24,,Burden,=H1*E24,,Final total:,=SUM(H23:H24)
+Margin,=(B24+B25)*H2,,Margin,=(E24+E25)*H2,,,
+Total,=SUM(B24:B26),,Total,=SUM(E26:E26),,,

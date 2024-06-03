@@ -1,0 +1,29 @@
+---
+
+string_to_dict:
+  - string: "Name: "
+    key: name
+    type: string
+  - string: "Phone: "
+    key: phone
+    type: string
+  - string: "Address ZIP code: "
+    key: zip
+    type: string
+  - string: "Number of acres that need mowed: "
+    key: acres
+    type: int
+  - string: "Approximately how tall is the grass in inches?: "
+    key: height
+    type: int
+  - string: "Is there any trash or debris in the pasture that could break our equipment?: "
+    key: trash
+    type: string
+  - string: "Is the pasture dry enough to mow?: "
+    key: dry
+    type: string
+  - string: "When do you want to start this project?: "
+    key: timeline
+    type: string
+
+...

@@ -2,33 +2,68 @@
 
 - hosts: all
   gather_facts: false
-  vars:
-    name: "Andy Huffman"
-    email: "circlejh@outlook.com"
-    phone: "8324706635"
-    postal_code: 77423
-    acres: 2
-    height: 4
-    trash: no
-    dry: yes
-    timeline: ASAP
-
   tasks:
+    - name: Include vars
+      include_vars:
+        dir: "{{ working_dir }}/inventory/group_vars/all"
+
+# Put the following three tasks into a 'tasks/get_email_facts.yml' file
+
+    - name: Validate request
+      assert:
+        that:
+          - ansible_eda.event.meta.headers.Host == webhook_host
+          - ansible_eda.event.meta.headers["x-from"] == webhook_x_from
+          - ansible_eda.event.meta.source.name == webhook_source
+          - ansible_eda.event.payload.from == webhook_payload_from
+
+    - name: Get email body
+      register: email_body
+      uri:
+        url: "{{ webhook_url }}/{{ ansible_eda.event.payload.emailId }}/textLines"
+        headers:
+          Accept: "*/*"
+          x-api-key: "{{ webhook_api_token }}"
+        body_format: json
+        body:
+          decodeHtmlEntities: true
+          lineSeparator: "NEWLINE"
+
+    - name: Set email facts
+      set_fact:
+        email_facts: |-
+          {%- set email_facts = {} -%}
+          {%- for line in email_body.json.lines -%}
+            {%- for conversion in string_to_dict -%}
+              {%- if conversion.string in line -%}
+                {%- if conversion.type == "string" -%}
+                  {%- set string = line|replace(conversion.string,'')|string -%}
+                {%- elif conversion.type == "int" -%}
+                  {%- set string = line|replace(conversion.string,'')|int -%}
+                {%- endif -%}
+                {%- set x=email_facts.__setitem__(conversion.key, string) -%}
+              {%- endif -%}
+            {%- endfor -%} 
+          {%- endfor -%}
+          {{ email_facts }}
+
+# Put this into a 'tasks/mowing_quote.yml' file and then trigger that call with 
+# a when referencing the email_facts var
 
     - name: Make quote csv
       vars:
         equipment:
           mower: |-
             {%- for mower in circlejh_equipment.mowers -%}
-              {%- if (mower.min_acres < acres < mower.max_acres) and
-                     (mower.min_grass_height < height < mower.max_grass_height) -%}
+              {%- if (mower.min_acres < email_facts.acres < mower.max_acres) and
+                     (mower.min_grass_height < email_facts.height < mower.max_grass_height) -%}
             {{ mower }}
               {%- endif -%}
             {%- endfor -%}
           truck: "{{ circlejh_equipment.truck }}"
           equipment_trailer: "{{ circlejh_equipment.trailer.equipment }}"
         project: |-
-          {%- set hours = ( acres / equipment.mower.acres_per_hour ) | round(0,'ceil') | int -%}
+          {%- set hours = ( email_facts.acres / equipment.mower.acres_per_hour ) | round(0,'ceil') | int -%}
           {%- set days = ( hours / working_day_hours ) | round(0,'ceil') | int -%}
           {%- set weeks = ( days / 5 ) | round(0,'ceil') | int -%}
           {%- set project = {
@@ -38,20 +73,9 @@
             } -%}
           {{ project }} 
       template:
-        src: "{{ playbook_dir }}/../templates/mowing_quote.j2"
-        dest: "/tmp/{{ name | replace(' ', '_') }}-mowing-quote.csv"
+        src: "{{ working_dir }}/templates/mowing_quote.j2"
+        dest: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv"
 
-    - name: Email quote to circlejh@outlook.com
-      community.general.mail:
-        host: "mailslurp.mx"
-        port: 2465
-        secure: starttls
-        username: ""
-        password: "" 
-        subject: "Automated quote generation for {{ name }}"
-        from: "69733564-13ec-4e6e-8cd0-f392ba01b933@mailslurp.net"
-        body: "Quote csv is attached"
-        to: "circlejh@outlook.com"
-        attach: "/tmp/{{ name | replace(' ', '_') }}-mowing-quote.csv"
-        
+# Send quote via slack api       
 ...
+
