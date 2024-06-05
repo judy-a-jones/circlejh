@@ -11,15 +11,15 @@ Timeline:,{{ email_facts.timeline }},,,,,,
 Rates:,,,,,,,
 Equipment:,Day cost:,Week cost:,Notes:,,,,
 {% for entry in lookup('ansible.builtin.dict', equipment) %}
-{{ entry.key }},{{ equipment[entry.key].cost }},,{%- if equipment[entry.key].acres_per_hour is defined -%}Acres per hour: {{ equipment[entry.key].acres_per_hour }}{%- endif -%},,,,
+{%- if equipment[entry.key].type is defined -%}{{ equipment[entry.key].type }}{%- else -%}{{ entry.key }}{%- endif -%},{{ equipment[entry.key].cost }},,{%- if equipment[entry.key].acres_per_hour is defined -%}Acres per hour: {{ equipment[entry.key].acres_per_hour }}{%- endif -%},,,,
 {% endfor %}
 ,,,,,,,
-Labor,Hour cost,,,,,,
+Labor:,Hour cost:,,,,,,
 {{ equipment.mower.labor_type }},{{ labor[equipment.mower.labor_type] }},,,,,,
 ,,,,,,,
 ,,,,,,,
 Totals:,,,,,,,
-Equipment cost:,,,Labor cost,,,Total cost:,
+Equipment cost:,,,Labor cost:,,,Total cost:,
 Item,Cost,,Item,Cost,,Total:,=SUM(B27+E27)
 Cost,=(B13+B14)*H5,,Cost,=B18*H4,,Sales tax,={{ sales_tax }}*H23
 Burden,=H1*B24,,Burden,=H1*E24,,Final total:,=SUM(H23:H24)

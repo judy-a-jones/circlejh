@@ -54,12 +54,14 @@
       vars:
         equipment:
           mower: |-
+            {%- set mowers = [] -%}
             {%- for mower in circlejh_equipment.mowers -%}
               {%- if (mower.min_acres < email_facts.acres < mower.max_acres) and
                      (mower.min_grass_height < email_facts.height < mower.max_grass_height) -%}
-            {{ mower }}
+                {%- set _ = mowers.append(mower) -%}
               {%- endif -%}
             {%- endfor -%}
+            {{ mowers|first }}
           truck: "{{ circlejh_equipment.truck }}"
           equipment_trailer: "{{ circlejh_equipment.trailer.equipment }}"
         project: |-
@@ -76,6 +78,47 @@
         src: "{{ working_dir }}/templates/mowing_quote.j2"
         dest: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv"
 
-# Send quote via slack api       
-...
+    - name: "Get size of /tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv"
+      register: quote_stat
+      stat:
+        path: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv"
 
+## Make this it's own tasks file
+
+    - name: Get upload url
+      register: upload_url
+      uri:
+        url: "https://slack.com/api/files.getUploadURLExternal?filename={{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv&length={{ quote_stat.stat.size }}&pretty=1"
+        headers:
+          Authorization: "Bearer {{ token }}"
+          charset: "utf-8"
+
+    - name: Upload file to url
+      register: upload_file
+      uri:
+        url: '{{ upload_url.json.upload_url }}'
+        method: POST
+        src: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv"
+        headers:
+          Authorization: "Bearer {{ token }}"
+          charset: "utf-8"
+
+    - name: 'Check upload'
+      uri:
+        url: "https://slack.com/api/files.completeUploadExternal?files=%5B%7B%22id%22%3A%22{{ upload_url.json.file_id }}%22%7D%5D&channel_id={{ channel }}&pretty=1"
+        method: POST
+        headers:
+          Authorization: 'Bearer {{ token }}'
+          charset: "utf-8"
+      register: upload_check
+
+    - name: 'Send download link'
+      uri:
+        url: "https://slack.com/api/chat.postMessage?channel={{ channel }}&text={{ upload_check.json.files[0].url_private_download | urlencode }}&pretty=1"
+        method: POST
+        headers:
+          Authorization: 'Bearer {{ token }}'
+          charset: "utf-8"
+      register: upload_check
+
+...
