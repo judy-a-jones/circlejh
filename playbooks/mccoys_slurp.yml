@@ -1,0 +1,39 @@
+---
+
+- hosts: all
+  gather_facts: false
+  vars:
+    material:
+      - name: "8x6-7-bark-on-cedar-round-post"
+        store: "mccoys"
+        price_indicator: "PriceSpecification"
+  tasks:
+    - name: Get info
+      loop: "{{ material }}"
+      vars:
+        curl_options: |-
+          {%- if "mccoys" in item.store -%}
+          -H 'cookie: Store=60' https://www.mccoys.com/shop/p/060157/{{ item.name }}
+          {%- endif -%}
+      register: output
+      shell: "curl {{ curl_options }}"
+
+    - name: Find price
+      loop: "{{ output.results }}"
+      loop_control:
+        label: "Checking price on {{ item.item.name }}"
+        loop_var: item
+      vars:
+        index: |-
+          {%- for line in item.stdout_lines -%}
+            {%- if item.item.price_indicator in line -%}
+          {{ loop.index0|int }}
+            {%- endif -%}
+           {%- endfor -%}
+      set_fact:
+        material_pricing: # use jinja2 to make dict
+          "{{ item.item.name }}": "{{ item.stdout_lines[index|int + 1]  | split(':') | last | replace(',','') | trim }}"
+
+    - debug:
+        msg: "{{ material_pricing }}"
+...
