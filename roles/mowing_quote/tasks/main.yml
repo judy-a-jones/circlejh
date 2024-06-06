@@ -1,0 +1,31 @@
+---
+
+- name: "Make mowing quote csv at {{ quote_path }}"
+  vars:
+    equipment:
+      mower: |-
+        {%- set mowers = [] -%}
+        {%- for mower in circlejh_equipment.mowers -%}
+          {%- if (mower.min_acres < email_facts.acres < mower.max_acres) and
+                 (mower.min_grass_height < email_facts.height < mower.max_grass_height) -%}
+            {%- set _ = mowers.append(mower) -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {{ mowers|first }}
+      truck: "{{ circlejh_equipment.truck }}"
+      equipment_trailer: "{{ circlejh_equipment.trailer.equipment }}"
+    project: |-
+      {%- set hours = ( email_facts.acres / equipment.mower.acres_per_hour ) | round(0,'ceil') | int -%}
+      {%- set days = ( hours / working_day_hours ) | round(0,'ceil') | int -%}
+      {%- set weeks = ( days / 5 ) | round(0,'ceil') | int -%}
+      {%- set project = {
+        "hours": hours,
+        "days": days,
+        "weeks": weeks
+        } -%}
+      {{ project }} 
+  template:
+    src: "mowing_quote.j2"
+    dest: "{{ quote_path }}"
+
+...

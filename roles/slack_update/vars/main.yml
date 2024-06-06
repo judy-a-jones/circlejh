@@ -1,7 +1,7 @@
 ---
 
 slack_headers:
-  Authorization: "Bearer {{ token }}"
+  Authorization: "Bearer {{ slack_token }}"
   charset: "utf-8"
 
 slack_api_url: "https://slack.com/api"
