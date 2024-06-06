@@ -1,0 +1,36 @@
+---
+
+- name: "Get size of {{ quote_path }}"
+  register: quote_stat
+  stat:
+    path: "{{ quote_path }}"
+
+- name: "Get upload url from {{ slack_api_url }} for {{ quote_path | split('/') | last }}"
+  register: upload_url
+  uri:
+    url: "{{ slack_api_url }}/files.getUploadURLExternal?filename={{ quote_path | split('/') | last }}&length={{ quote_stat.stat.size }}&pretty=1"
+    headers: "{{ slack_headers }}"
+
+- name: "Upload {{ quote_path }} to {{ upload_url.json.upload_url }}"
+  register: upload_file
+  uri:
+    url: '{{ upload_url.json.upload_url }}'
+    method: POST
+    src: "{{ quote_path }}"
+    headers: "{{ slack_headers }}"
+
+- name: "Complete upload {{ quote_path }} to {{ upload_url.json.upload_url }}"
+  register: upload_check
+  uri:
+    url: "{{ slack_api_url }}/files.completeUploadExternal?files=%5B%7B%22id%22%3A%22{{ upload_url.json.file_id }}%22%7D%5D&channel_id={{ channel }}&pretty=1"
+    method: POST
+    headers: "{{ slack_headers }}" 
+
+- name: "Send {{ upload_check.json.files[0].url_private_download }} to #quote channel"
+  register: upload_check
+  uri:
+    url: "{{ slack_api_url }}/chat.postMessage?channel={{ channel }}&text={{ upload_check.json.files[0].url_private_download | urlencode }}&pretty=1"
+    method: POST
+    headers: "{{ slack_headers }}"
+
+...
