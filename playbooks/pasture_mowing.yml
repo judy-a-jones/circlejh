@@ -7,8 +7,6 @@
       include_vars:
         dir: "{{ working_dir }}/inventory/group_vars/all"
 
-# Put the following three tasks into a 'tasks/get_email_facts.yml' file
-
     - name: Validate request
       assert:
         that:
@@ -17,39 +15,12 @@
           - ansible_eda.event.meta.source.name == webhook_source
           - ansible_eda.event.payload.from == webhook_payload_from
 
-    - name: Get email body
-      register: email_body
-      uri:
-        url: "{{ webhook_url }}/{{ ansible_eda.event.payload.emailId }}/textLines"
-        headers:
-          Accept: "*/*"
-          x-api-key: "{{ webhook_api_token }}"
-        body_format: json
-        body:
-          decodeHtmlEntities: true
-          lineSeparator: "NEWLINE"
 
-    - name: Set email facts
-      set_fact:
-        email_facts: |-
-          {%- set email_facts = {} -%}
-          {%- for line in email_body.json.lines -%}
-            {%- for conversion in string_to_dict -%}
-              {%- if conversion.string in line -%}
-                {%- if conversion.type == "string" -%}
-                  {%- set string = line|replace(conversion.string,'')|string -%}
-                {%- elif conversion.type == "int" -%}
-                  {%- set string = line|replace(conversion.string,'')|int -%}
-                {%- endif -%}
-                {%- set x=email_facts.__setitem__(conversion.key, string) -%}
-              {%- endif -%}
-            {%- endfor -%} 
-          {%- endfor -%}
-          {{ email_facts }}
-
-    - name: Set quote path
-      set_fact:
-        quote_path: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv" 
+    - name: "Get email info for {{ emailId }}"
+      vars:
+        emailId: "{{ ansible_eda.event.payload.emailId }}"
+      import_role:
+        name: "{{ working_dir }}/roles/email_facts"
 
 # Put this into a 'tasks/mowing_quote.yml' file and then trigger that call with 
 # a when referencing the email_facts var

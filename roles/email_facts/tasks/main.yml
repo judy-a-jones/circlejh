@@ -1,0 +1,37 @@
+---
+
+- name: "Get email body from emailId {{ emailId }}"
+  register: email_body
+  uri:
+    url: "{{ webhook_url }}/{{ emailId }}/textLines"
+    headers:
+      Accept: "*/*"
+      x-api-key: "{{ webhook_api_token }}"
+    body_format: json
+    body:
+      decodeHtmlEntities: true
+      lineSeparator: "NEWLINE"
+
+- name: "Set email facts for emailId {{ emailId }}"
+  set_fact:
+    email_facts: |-
+      {%- set email_facts = {} -%}
+      {%- for line in email_body.json.lines -%}
+        {%- for conversion in string_to_dict -%}
+          {%- if conversion.string in line -%}
+            {%- if conversion.type == "string" -%}
+              {%- set string = line|replace(conversion.string,'')|string -%}
+            {%- elif conversion.type == "int" -%}
+              {%- set string = line|replace(conversion.string,'')|int -%}
+            {%- endif -%}
+            {%- set x=email_facts.__setitem__(conversion.key, string) -%}
+          {%- endif -%}
+        {%- endfor -%} 
+      {%- endfor -%}
+      {{ email_facts }}
+
+- name: "Set quote path for {{ emailId }}"
+  set_fact:
+    quote_path: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv" 
+
+...
