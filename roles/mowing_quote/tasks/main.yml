@@ -17,11 +17,9 @@
     project: |-
       {%- set hours = ( email_facts.acres / equipment.mower.acres_per_hour ) | round(0,'ceil') | int -%}
       {%- set days = ( hours / working_day_hours ) | round(0,'ceil') | int -%}
-      {%- set weeks = ( days / 5 ) | round(0,'ceil') | int -%}
       {%- set project = {
         "hours": hours,
         "days": days,
-        "weeks": weeks
         } -%}
       {{ project }} 
   template:

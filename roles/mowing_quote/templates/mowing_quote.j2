@@ -1,27 +1,31 @@
-Name:,{{ email_facts.name }},,,,,Burden:,{{ burden }}
-Phone:,{{ email_facts.phone }},,,,,Margin:,{{ margin }}
-Zip:,{{ email_facts.zip }},,,,,Timeline:,
-Acres,{{ email_facts.acres }},,,,,Hours:,{{ project.hours }}
-Grass height in inches:,{{ email_facts.height }},,,,,Days:,{{ project.days }}
-Trash:,{{ email_facts.trash }},,,,,Weeks:,{{ project.weeks }}
-Dry:,{{ email_facts.dry }},,,,,,
-Timeline:,{{ email_facts.timeline }},,,,,,
-,,,,,,,
-,,,,,,,
-Rates:,,,,,,,
-Equipment:,Day cost:,Week cost:,Notes:,,,,
-{% for entry in lookup('ansible.builtin.dict', equipment) %}
-{%- if equipment[entry.key].type is defined -%}{{ equipment[entry.key].type }}{%- else -%}{{ entry.key }}{%- endif -%},{{ equipment[entry.key].cost }},,{%- if equipment[entry.key].acres_per_hour is defined -%}Acres per hour: {{ equipment[entry.key].acres_per_hour }}{%- endif -%},,,,
+Name:,{{ email_facts.name }},,,,,,,
+Phone: ,{{ email_facts.phone }},,,,Burden:,{{ burden }},,
+Zip,{{ email_facts.zip }},,,,Margin:,{{ margin }},,
+Email:,INSERT FROM DURABLE,,,,,,,
+Acres:,{{ email_facts.acres }},,,,Timeline:,,,
+Grass height in inches:,{{ email_facts.height }},,,,Hours:,{{ project.hours }},,
+Dry enough to mow?,{{ email_facts.dry }},,,,Days:,{{ project.days }},,
+Is there debris in the field?,{{ email_facts.trash }},,,,,,,
+Timeline:,{{ email_facts.timeline }},,,,,,,
+,,,,,,,,
+,,,,,,,,
+Equipment cost:,,,,,,,,
+Item:,Rate:,Days:,Total:,Burden:,Margin:,Total:,,
+{% set equipment_starting_cell = 14 %}
+{% for machine in lookup('ansible.builtin.dict', equipment) %}
+{% set cell_number = equipment_starting_cell|int + loop.index0 %}
+{% if equipment[machine.key].type is defined %}{{ equipment[machine.key].type }}{% else %}{{ machine.key }}{% endif %},{{ equipment[machine.key].cost }},=G7,=C{{ cell_number }}*B{{ cell_number }},=G2*D{{ cell_number }},=(D{{ cell_number }}+E{{ cell_number }})*G3,=SUM(D{{ cell_number }}:F{{ cell_number }}),,
 {% endfor %}
-,,,,,,,
-Labor:,Hour cost:,,,,,,
-{{ equipment.mower.labor_type }},{{ labor[equipment.mower.labor_type] }},,,,,,
-,,,,,,,
-,,,,,,,
-Totals:,,,,,,,
-Equipment cost:,,,Labor cost:,,,Total cost:,
-Item:,Cost:,,Item:,Cost:,,Total:,=SUM(B27+E27)
-Cost:,=(B13+B14)*H5,,Cost:,=B18*H4,,Sales tax:,={{ sales_tax }}*H23
-Burden:,=H1*B24,,Burden:,=H1*E24,,Final total:,=SUM(H23:H24)
-Margin:,=(B24+B25)*H2,,Margin:,=(E24+E25)*H2,,,
-Total:,=SUM(B24:B26),,Total:,=SUM(E26:E26),,,
+{% set equipment_ending_cell = equipment_starting_cell + lookup('ansible.builtin.dict', equipment)|length - 1 %}
+Total Equipment:,,,,,,=SUM(G{{ equipment_starting_cell }}:G{{ equipment_ending_cell }}),,
+,,,,,,,,
+Labor cost:,,,,,,,,
+Item:,Rate:,Hours:,Total:,Burden:,Margin:,Total:,,
+{% set labor_cell = equipment_ending_cell + 5 %}
+{{ equipment.mower.labor_type }},{{ labor[equipment.mower.labor_type] }},=G6,=C{{ labor_cell }}*B{{ labor_cell }},=G2*D{{ labor_cell }},=(D{{ labor_cell }}+E{{ labor_cell }})*G3,=SUM(D{{ labor_cell }}:F{{ labor_cell }}),,
+Total Labor:,,,,,,=G{{ labor_cell }},,
+,,,,,,,,
+,,,,,,,,
+Total Sales Tax,,,,,,"={{ sales_tax }}*SUM(G{{ equipment_ending_cell + 1 }},G{{ labor_cell + 1 }})",,
+Total Estimate:,,,,,,"=SUM(G{{ equipment_ending_cell + 1 }},G{{ labor_cell + 1 }},G{{ labor_cell + 4 }})",,
+,,,,,,,,
