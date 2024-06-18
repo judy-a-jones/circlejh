@@ -1,0 +1,124 @@
+---
+
+fencing:
+  - barb_wire:
+    feet_per_day: 200
+    email_string: "Barb wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+  - slick_wire:
+    feet_per_day: 200
+    email_string: "Slick wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/barbless-cable" 
+  - no_climb_4
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+    height: 4
+  - no_climb_5
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+    height: 5
+  - no_climb_6
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+    height: 6
+  - no_climb_wood_tr_4
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 4
+  - no_climb_wood_tr_5
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 5
+  - no_climb_wood_tr_6
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 6
+  - no_climb_pipe_tr_4
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "Drill stem - John Stewart"
+    height: 4
+  - no_climb_pipe_tr_5
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+      - "Drill stem - John Stewart"
+  - no_climb_pipe_tr_6
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "Drill stem - John Stewart"
+    height: 6
+  - no_climb_barbwire_tr_4
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+    height: 4
+  - no_climb_barbwire_tr_5
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-Drill stem - John Stewart
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+  - no_climb_barbwire_tr_6
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+    height: 6
+  - three_rail_wood:
+    feet_per_day: 175
+    email_string: "Three rail wood"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - four_rail_wood:
+    feet_per_day: 150
+    email_string: "Four rail wood"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - custom_wood:
+    feet_per_day: 100
+    email_string: "Custom design wood rail fence"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - pipe:
+    feet_per_day: 100
+    email_string: "Pipe"
+    material:
+      - "Drill stem - John Stewart"
+  - hot_wire:
+    feet_per_day: 500
+    email_string: "Hot wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bekaert-wire-high-tensile-125g-170k-psi-1320-ft-120656"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-yellow-snap-on-5-in-extender-t-post-insulators"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-5-mile-solar-fence-energizer-esp5mn-afw"
+  - other:
+    feet_per_day: 100
+    email_string: "Other (please specify in message)"
+
+...
