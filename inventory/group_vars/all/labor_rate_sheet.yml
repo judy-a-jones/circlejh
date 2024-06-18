@@ -4,5 +4,6 @@ working_day_hours: 8
 
 labor:
   operator: 50
-
+  foreman: 25
+  helper: 15
 ...

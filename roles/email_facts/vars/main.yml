@@ -1,0 +1,73 @@
+---
+
+string_to_dict:
+  - string: "Name: "
+    key: name
+    type: string
+  - string: "Phone: "
+    key: phone
+    type: string
+  - string: "Address ZIP code: "
+    key: zip
+    type: string
+  - string: "Number of acres that need mowed: "
+    key: acres
+    type: int
+  - string: "Approximately how tall is the grass in inches?: "
+    key: height
+    type: int
+  - string: "Is there any trash or debris in the pasture that could break our equipment?: "
+    key: trash
+    type: string
+  - string: "Is the pasture dry enough to mow?: "
+    key: dry
+    type: string
+  - string: "When do you want to start this project?: "
+    key: timeline
+    type: string
+  - string: "Fencing type: "
+    key: fence_type
+    type: string
+  - string: "Type of gate: "
+    key: gate_type
+    type: string
+  - string: "Fence length in feet: "
+    key: "fence_length"
+    type: int
+  - string: "Gate length in feet: "
+    key: "gate_length"
+    type: int
+  - string: "Fence height in feet: "
+    key: fence_height
+    type: int
+  - string: "Gate height in feet: "
+    key: gate_height
+    type: int
+  - string: "Fence post type: "
+    key: fence_post_type
+    type: string
+  - string: "Number of gates: "
+    key: gate_qty
+    type: int
+  - string: "Number of corners in fence: "
+    key: corner_qty
+    type: int
+  - string: "If you'd like a gate opener installed, how many do you need?: "
+    key: gate_opener_qty
+    type: int
+  - string: "Is the fence line clear, or will it need to be cleared by our team?: "
+    key: fence_line_clear
+    type: string
+  - string: "Is this replacing an existing fence, or is this a new fence?: "
+    key: new_or_replacement
+    type: string
+  - string: "Do you want hotwire ran on the inside of your fence?: "
+    key: hotwire_inside
+    type: string
+  - string: "Does the fence need painted?: "
+    key: paint
+    type: string
+  - string: "If the fence needs painted, what color?: "
+    key: paint_color
+    type: string
+...

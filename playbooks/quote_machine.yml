@@ -29,6 +29,13 @@
       import_role:
         name: "{{ working_dir }}/roles/mowing_quote"
 
+    - name: "Make fencing quote for {{ email_facts.name }}"
+      when:
+        - email_facts.fence_type is defined
+        - email_facts.fence_post_type is defined
+      import_role:
+        name: "{{ working_dir }}/roles/fencing_quote"
+
     - name: "Send {{ quote_path }} to slack"
       import_role:
         name: "{{ working_dir }}/roles/slack_update"

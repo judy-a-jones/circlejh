@@ -28,9 +28,22 @@ circlejh_equipment:
       labor_type: operator
   truck:
     cost: 100
+    sales_tax: 0
   trailer:
     equipment:
       cost: 50
+      sales_tax: 0
     tool:
       cost: 100
+      sales_tax: 0
+  skid_steer:
+    cost: 300
+    sales_tax: "{{ sales_tax }}"
+  post_pounder:
+    cost: 200
+    sales_tax: "{{ sales_tax }}"
+  side_by_side:
+    cost: 50
+    sales_tax: 0
+
 ...

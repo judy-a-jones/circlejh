@@ -1,0 +1,17 @@
+---
+
+- name: Set days fact
+  set_fact:
+    days: |-
+      {%- for type in fencing -%}
+        {%- if email_facts.fence_type == type.email_string -%}
+          {{ email_facts.fence_length / type.feet_per_day }}
+        {%- endif -%}
+      {%- endfor -%}
+
+- name: "Make fencing quote csv at {{ quote_path }}"
+  template:
+    src: "fencing_quote.j2"
+    dest: "{{ quote_path }}"
+
+...

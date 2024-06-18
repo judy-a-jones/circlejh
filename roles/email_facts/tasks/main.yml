@@ -32,6 +32,6 @@
 
 - name: "Set quote path for {{ emailId }}"
   set_fact:
-    quote_path: "/tmp/{{ email_facts.name | replace(' ', '_') }}-mowing-quote.csv" 
+    quote_path: "/tmp/{{ email_facts.name | replace(' ', '_') }}-quote.csv" 
 
 ...
