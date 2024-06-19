@@ -20,11 +20,11 @@ Timeline:,{{ email_facts.timeline }},,,,,
 Materials:,,,,,,
 Item:,Cost:,Sales Tax:,Burden:,Margin:,QTY:,Total:
 {%- set materials_starting_cell = 23 -%}
-{%- for item in material -%}
+{%- for item in materials -%}
 {% set cell_number = material_starting_cell|int + loop.index0 %}
 {{ item.name }},,=F3*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),{{ item.qty }},=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
-{% set materials_ending_cell = materials_starting_cell + lookup('ansible.builtin.dict', materials)|length - 1 %}
+{% set materials_ending_cell = materials_starting_cell + materials|length - 1 %}
 Total materials:,,,,,,=SUM(G{{ materials_starting_cell }}:G{{ materials_ending_cell }})
 ,,,,,,
 Equipment:,,,,,,
@@ -34,8 +34,8 @@ Item:,Cost per day:,Sales Tax:,Burden:,Margin:,Days:,Total:
 {%- set cell_number = equipment_starting_cell|int + loop.index0 %}
 {{ item.name }},{{ item.cost }},={{ item.sales_tax }}*B{{ cell_number }},=F1*B{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
-{% set equipment_ending_cell = equipment_starting_cell + lookup('ansible.builtin.dict', equipment)|length - 1 %}
-Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell:G{{ equipment_ending_cell }})
+{% set equipment_ending_cell = equipment_starting_cell + equipment|length - 1 %}
+Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell }}:G{{ equipment_ending_cell }})
 ,,,,,,
 Labor:,,,,,,
 Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
@@ -44,5 +44,5 @@ Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
 {%- set cell_number = labor_starting_cell|int + loop.index0 %}
 {{ item.name }},{{ item.hourly_cost }},={{ working_day_hours }}*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
-{% set labor_ending_cell = labor_starting_cell + lookup('ansible.builtin.dict', labor)|length - 1 %}
+{% set labor_ending_cell = labor_starting_cell + labor|length - 1 %}
 Total labor:,,,,,,=SUM(G{{ labor_starting_cell }}:G{{ labor_ending_cell }})
