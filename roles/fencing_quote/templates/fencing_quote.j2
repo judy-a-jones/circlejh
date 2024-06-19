@@ -21,7 +21,7 @@ Materials:,,,,,,
 Item:,Cost:,Sales Tax:,Burden:,Margin:,QTY:,Total:
 {%- set materials_starting_cell = 23 -%}
 {%- for item in materials -%}
-{% set cell_number = material_starting_cell|int + loop.index0 %}
+{% set cell_number = materials_starting_cell|int + loop.index0 %}
 {{ item.name }},,=F3*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),{{ item.qty }},=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
 {% set materials_ending_cell = materials_starting_cell + materials|length - 1 %}
