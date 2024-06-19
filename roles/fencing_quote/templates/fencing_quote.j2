@@ -3,8 +3,8 @@ Phone: ,{{ email_facts.phone }},,,Margin:,{{ margin }},
 Zip:,{{ email_facts.zip }},,,Sales Tax:,{{ sales_tax }},
 Fencing type:,{{ email_facts.fence_type }},,,,,
 Fence post type:,{{ email_facts.fence_post_type }},,,Number of days:,{{ days }},
-Fence length:,{{ email_facts.fence_length }},,,Grand total:,=G{{ materials_ending_cell + 1 }}+G{{ equipment_ending_cell + 1 }}+G{{ labor_ending_cell + 1 }},
-Fence height:,{{ email_facts.fence_height }},,,Grand total/ft:,=F6/B6,
+Fence length:,{{ email_facts.fence_length }},,,,,
+Fence height:,{{ email_facts.fence_height }},,,,,
 Type of gate:,{{ email_facts.gate_type }},,,,,
 Gate length:,{{ email_facts.gate_length }},,,,,
 Number of gates:,{{ email_facts.gate_qty }},,,,,
@@ -39,10 +39,14 @@ Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell }}:G{{ equipment_ending_c
 ,,,,,,
 Labor:,,,,,,
 Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
-{%- set labor_starting_cell = labor_ending_cell + 5 -%}
-{%- for item in labor -%}
+{%- set labor_starting_cell = equipment_ending_cell + 5 -%}
+{%- for item in fencing_labor -%}
 {%- set cell_number = labor_starting_cell|int + loop.index0 %}
 {{ item.name }},{{ item.hourly_cost }},={{ working_day_hours }}*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
-{% set labor_ending_cell = labor_starting_cell + labor|length - 1 %}
+{% set labor_ending_cell = labor_starting_cell + fencing_labor|length - 1 %}
 Total labor:,,,,,,=SUM(G{{ labor_starting_cell }}:G{{ labor_ending_cell }})
+,,,,,,
+,,,,Grand total:,=G{{ materials_ending_cell + 1 }}+G{{ equipment_ending_cell + 1 }}+G{{ labor_ending_cell + 1 }},
+,,,,Grand total/ft:,=F{{ labor_ending_cell + 4 }}/B6,
+

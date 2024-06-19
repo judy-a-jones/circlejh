@@ -545,10 +545,10 @@ posts:
     height: 6
 
 
-labor:
-  - name: Foreman
+fencing_labor:
+  - name: "Foreman"
     hourly_cost: "{{ labor.foreman }}"
-  - name: Helper
+  - name: "Helper"
     hourly_cost: "{{ labor.helper }}"
 
 h-braces:

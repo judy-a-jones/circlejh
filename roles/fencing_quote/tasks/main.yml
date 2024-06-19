@@ -1,4 +1,171 @@
 ---
+- name: "Make fencing quote csv at {{ quote_path }}"
+  vars:
+    days: |-
+      {%- for type in fencing -%}
+        {%- if email_facts.fence_type == type.email_string -%}
+          {{ email_facts.fence_length / type.feet_per_day }}
+        {%- endif -%}
+      {%- endfor -%}
+    materials: |-
+      {%- set material = [] -%}
+      {%- for type in fencing -%}
+        {%- if (email_facts.fence_type == "Hotwire") and
+               (email_facts.fence_type == type.email_string) -%}
+          {%- for item in hotwire.material -%}
+            {%- if item.name == "hotwire" -%}
+              {%- set _ = material.append({
+                "name": item.url,
+                "qty": (email_facts.fence_length * (email_facts.fence_height - 1)) / item.length
+               }) -%}
+            {%- elif item.name == "insulators" -%}
+              {%- set _ = material.append({
+                "name": item.url,
+                "qty": (email_facts.fence_length / distance_between_posts) / item.qty
+              }) -%}
+            {%- elif ("ground" in item.name) or
+                     ("solar" in item.name) -%}
+              {%- set _ = material.append({
+                "name": item.url,
+                "qty": 1
+              }) -%}
+            {%- endif -%}  
+          {%- endfor -%}
+        {%- elif (email_facts.fence_type == type.email_string) and
+                 (email_facts.height is not defined) -%}
+          {%- for item in type.material -%}
+            {%- set _ = material.append({
+              "name": item,
+              "qty": (email_facts.fence_length * email_facts.fence_height) / type.length
+              }) -%}
+          {%- endfor -%}
+        {%- elif (email_facts.fence_type == type.email_string) and
+               (email_facts.height is defined) and
+               (email_facts.height == item.height) -%}
+          {%- for item in type.material -%}
+            {%- set _ = material.append({
+              "name": item,
+              "qty": email_facts.fence_length / type.length
+              }) -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if email_facts.fence_type == "No climb with wood top rail" -%}
+           {%- set _ = material.append({
+             "name": "Top rail " + top_rails.wood.url,
+             "qty": email_facts.fence_length / top_rails.wood.length
+             }) -%}
+        {%- elif email_facts.fence_type == "No climb with pipe top rail" -%}
+           {%- set _ = material.append({
+             "name": "Top rail " + top_rails.pipe.url,
+             "qty": email_facts.fence_length / top_rails.pipe.length
+             }) -%}
+        {%- elif email_facts.fence_type == "No climb with barb wire on top" -%}
+           {%- set _ = material.append({
+             "name": "Top rail " + top_rails.barb_wire.url,
+             "qty": email_facts.fence_length / top_rails.barb_wire.length
+             }) -%}
+        {%- endif -%} 
+      {%- endfor -%}
+      {%- for type in posts -%}
+        {%- if (email_facts.fence_post_type == type.email_string) and
+               (email_facts.fence_height == type.height) -%}
+          {%- set h_brace_post_count = posts_per_h_brace * ((email_facts.fence_length / distance_between_h_braces ) + (2 * email_facts.corner_qty) + (2 * email_facts.gate_qty)) -%}
+          {%- for item in type.material -%}
+            {%- set _ = material.append({
+              "name": item,
+              "qty": (email_facts.fence_length / distance_between_posts) + h_brace_post_count
+              }) -%}
+          {%- endfor -%}
+          {%- if "Round wood posts" in type.email_string -%}
+            {%- set _ = material.append({
+              "name": hardware.fence_nails.url,
+              "qty": (email_facts.fence_height * (email_facts.fence_length / distance_between_posts)) / hardware.fence_nails.qty
+            }) -%}
+          {%- endif -%}
+          {%- if "T-posts" in type.email_string -%}
+            {%- set _ = material.append({
+              "name": hardware.t_post_clips.url,
+              "qty": (email_facts.fence_height * (email_facts.fence_length / distance_between_posts)) / hardware.t_post_clips.qty
+            }) -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for type in gates -%}
+        {%- if (email_facts.gate_type == type.email_string) and
+               (email_facts.gate_length == type.length) -%}
+          {%- for item in type.material -%}
+            {%- set _ = material.append({
+              "name": item,
+              "qty": email_facts.gate_qty
+              }) -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if email_facts.gate_opener_qty > 0 -%}
+        {%- for item in gate_openers.material -%}
+          {%- set _ = material.append({
+            "name": item,
+            "qty": email_facts.gate_opener_qty
+          }) -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if email_facts.hotwire_inside == "Yes" -%}
+        {%- for item in hotwire.material -%}
+          {%- if item.name == "hotwire" -%}
+            {%- set _ = material.append({
+              "name": item.url,
+              "qty": email_facts.fence_length / item.length
+             }) -%}
+          {%- elif item.name == "insulators" -%}
+            {%- set _ = material.append({
+              "name": item.url,
+              "qty": (email_facts.fence_length / distance_between_posts) / item.qty
+            }) -%}
+          {%- elif ("ground" in item.name) or
+                   ("solar" in item.name) -%}
+            {%- set _ = material.append({
+              "name": item.url,
+              "qty": 1
+            }) -%}
+          {%- endif -%}  
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if email_facts.paint == "Yes" -%}
+        {%- for item in paint.material -%}
+          {%- set _ = material.append({
+            "name": item.name,
+            "qty": email_facts.fence_length / item.feet
+          }) -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {{ material }}
+    equipment: |-
+      {%- set equipment = fencing_equipment.equipment -%}
+      {%- if ("Pipe" in email_facts.fence_type) or
+             ("pipe" in email_facts.fence_type) or
+             ("Pipe" in email_facts.fence_post_type) -%}
+        {%- for item in pipe_fence.equipment -%}
+          {%- set _ = equipment.append(item) -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if "Yes" in email_facts.fence_line_clear -%} 
+        {%- for item in clear_fence_line.equipment -%}
+          {%- set _ = equipment.append(item) -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if "Replace" in email_facts.new_or_replacement -%} 
+        {%- for item in clear_fence_line.equipment -%}
+          {%- set _ = equipment.append(item) -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {{ equipment }}
+  loop:
+    - "{{ days }}"
+    - "{{ materials }}"
+    - "{{ equipment }}"
+    - "{{ fencing_labor }}"
+  debug:
+    msg: "{{ item }}"
 
 - name: "Make fencing quote csv at {{ quote_path }}"
   vars:
