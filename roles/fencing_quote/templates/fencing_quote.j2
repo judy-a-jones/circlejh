@@ -3,11 +3,10 @@ Phone: ,{{ email_facts.phone }},,,Margin:,{{ margin }},
 Zip:,{{ email_facts.zip }},,,Sales Tax:,{{ sales_tax }},
 Fencing type:,{{ email_facts.fence_type }},,,,,
 Fence post type:,{{ email_facts.fence_post_type }},,,Number of days:,{{ days }},
-Fence length:,{{ email_facts.fence_length }},,,Grand total:,=G28+G38+G44,
+Fence length:,{{ email_facts.fence_length }},,,Grand total:,=G{{ materials_ending_cell + 1 }}+G{{ equipment_ending_cell + 1 }}+G{{ labor_ending_cell + 1 }},
 Fence height:,{{ email_facts.fence_height }},,,Grand total/ft:,=F6/B6,
 Type of gate:,{{ email_facts.gate_type }},,,,,
 Gate length:,{{ email_facts.gate_length }},,,,,
-Gate height:,{{ email_facts.gate_height }},,,,,
 Number of gates:,{{ email_facts.gate_qty }},,,,,
 Number of corners:,{{ email_facts.corner_qty }},,,,,
 Gate opener:,{{ email_facts.gate_opener_qty }},,,,,
@@ -20,25 +19,30 @@ Timeline:,{{ email_facts.timeline }},,,,,
 ,,,,,,
 Materials:,,,,,,
 Item:,Cost:,Sales Tax:,Burden:,Margin:,QTY:,Total:
-=B4,,=F3*B23,=F1*C23,=F2*(D23+C23),???,=F23*SUM(B23:E23)
-=B5,,=F3*B24,=F1*C24,=F2*(D24+C24),=(B6/8)+(6*B12)+(6*B11),=F24*SUM(B24:E24)
-=B8,,=F3*B25,=F1*C25,=F2*(D25+C25),=B11,=F25*SUM(B25:E25)
-Gate opener,,=F3*B26,=F1*C26,=F2*(D26+C26),=B13,=F26*SUM(B26:E26)
-MSC Hardware,,=F3*B27,=F1*C27,=F2*(D27+C27),???,=F27*SUM(B27:E27)
-Total materials:,,,,,,=SUM(G23:G27)
+{%- set materials_starting_cell = 23 -%}
+{%- for item in material -%}
+{% set cell_number = material_starting_cell|int + loop.index0 %}
+{{ item.name }},,=F3*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),{{ item.qty }},=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
+{% endfor %}
+{% set materials_ending_cell = materials_starting_cell + lookup('ansible.builtin.dict', materials)|length - 1 %}
+Total materials:,,,,,,=SUM(G{{ materials_starting_cell }}:G{{ materials_ending_cell }})
 ,,,,,,
 Equipment:,,,,,,
 Item:,Cost per day:,Sales Tax:,Burden:,Margin:,Days:,Total:
-Truck,{{ circlejh_equipment.truck.cost }},={{ circlejh_equipment.truck.sales_tax }}*B32,=F1*B32,=F2*(D32+C32),=F5,=F32*SUM(B32:E32)
-Equipment trailer,{{ circlejh_equipment.trailer.equipment.cost }},={{ circlejh_equipment.trailer.equipment.sales_tax }}*B33,=F1*B33,=F2*(D33+C33),=F5,=F33*SUM(B33:E33)
-Tool trailer,{{ circlejh_equipment.trailer.tool.cost }},={{ circlejh_equipment.trailer.tool.sales_tax }}*B34,=F1*B34,=F2*(D34+C34),=F5,=F34*SUM(B34:E34)
-Skid steer,{{ circlejh_equipment.skid_steer.cost }},={{ circlejh_equipment.skid_steer.sales_tax }}*B35,=F1*B35,=F2*(D35+C35),=F5,=F35*SUM(B35:E35)
-Post pounder,{{ circlejh_equipment.post_pounder.cost }},={{ circlejh_equipment.post_pounder.sales_tax }}*B36,=F1*B36,=F2*(D36+C36),=F5,=F36*SUM(B36:E36)
-Side by side,{{ circlejh_equipment.side_by_side.cost }},={{ circlejh_equipment.side_by_side.sales_tax }}*B37,=F1*B37,=F2*(D37+C37),=F5,=F37*SUM(B37:E37)
-Total equipment:,,,,,,=SUM(G32:G37)
+{%- set equipment_starting_cell = materials_ending_cell + 5 -%}
+{%- for item in equipment -%}
+{%- set cell_number = equipment_starting_cell|int + loop.index0 %}
+{{ item.name }},{{ item.cost }},={{ item.sales_tax }}*B{{ cell_number }},=F1*B{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
+{% endfor %}
+{% set equipment_ending_cell = equipment_starting_cell + lookup('ansible.builtin.dict', equipment)|length - 1 %}
+Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell:G{{ equipment_ending_cell }})
 ,,,,,,
 Labor:,,,,,,
 Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
-Foreman,{{ labor.foreman }},={{ working_day_hours }}*B42,=F1*C42,=F2*(D42+C42),=F5,=F42*SUM(B42:E42)
-Helper,{{ labor.helper }},={{ working_day_hours }}*B43,=F1*C43,=F2*(D43+C43),=F5,=F43*SUM(B43:E43)
-Total labor:,,,,,,=SUM(G42:G43)
+{%- set labor_starting_cell = labor_ending_cell + 5 -%}
+{%- for item in labor -%}
+{%- set cell_number = labor_starting_cell|int + loop.index0 %}
+{{ item.name }},{{ item.hourly_cost }},={{ working_day_hours }}*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
+{% endfor %}
+{% set labor_ending_cell = labor_starting_cell + lookup('ansible.builtin.dict', labor)|length - 1 %}
+Total labor:,,,,,,=SUM(G{{ labor_starting_cell }}:G{{ labor_ending_cell }})

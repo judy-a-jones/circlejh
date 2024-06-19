@@ -1,0 +1,546 @@
+---
+
+distance_between_posts: 8
+
+fencing:
+  - barb_wire:
+    feet_per_day: 200
+    email_string: "Barb wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+    length: 1320
+  - slick_wire:
+    feet_per_day: 200
+    email_string: "Slick wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/barbless-cable" 
+    length: 1320
+  - no_climb_4:
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+    height: 4
+    length: 330
+  - no_climb_5:
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+    height: 5
+  - no_climb_6:
+    feet_per_day: 200
+    email_string: "No climb without top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+    height: 6
+  - no_climb_wood_tr_4:
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 4
+  - no_climb_wood_tr_5:
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 5
+  - no_climb_wood_tr_6:
+    feet_per_day: 200
+    email_string: "No climb with wood top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "https://www.mccoys.com/shop/p/060108/4-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 6
+  - no_climb_pipe_tr_4:
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "Drill stem - John Stewart"
+    height: 4
+  - no_climb_pipe_tr_5:
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+      - "Drill stem - John Stewart"
+  - no_climb_pipe_tr_6:
+    feet_per_day: 200
+    email_string: "No climb with pipe top rail"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "Drill stem - John Stewart"
+    height: 6
+  - no_climb_barbwire_tr_4:
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/red-brand-cattle-fence-48-in-h"
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+    height: 4
+  - no_climb_barbwire_tr_5:
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/ok-brand-1660-2-12-1-2-200-max-tight-square-knot-horse-fence"
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+  - no_climb_barbwire_tr_6:
+    feet_per_day: 200
+    email_string: "No climb with barb wire on top"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bull-barn-field-fence-fixed-knot-125-guage-17-75-6-336"
+      - "https://www.tractorsupply.com/tsc/product/bekaert-18-ga-barbed-wire-4-pt"
+    height: 6
+  - three_rail_wood:
+    feet_per_day: 175
+    email_string: "Three rail wood"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - four_rail_wood:
+    feet_per_day: 150
+    email_string: "Four rail wood"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - custom_wood:
+    feet_per_day: 100
+    email_string: "Custom design wood rail fence"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+  - pipe:
+    feet_per_day: 100
+    email_string: "Pipe"
+    material:
+      - "Drill stem - John Stewart"
+  - hot_wire:
+    feet_per_day: 500
+    email_string: "Hot wire"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/bekaert-wire-high-tensile-125g-170k-psi-1320-ft-120656"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-yellow-snap-on-5-in-extender-t-post-insulators"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-5-mile-solar-fence-energizer-esp5mn-afw"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-6-ft-copper-coated-ground-rod"
+      - "https://www.tractorsupply.com/tsc/product/american-farmworks-aluminum-ground-rod-clamp"
+  - other:
+    feet_per_day: 100
+    email_string: "Other (please specify in message)"
+
+gates:
+  # Economy pipe gate
+  - economy_pipe_4:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-green-4-ft-6eg4"
+    length: 4
+  - economy_pipe_6:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-green-6-ft-6eg6"
+    length: 6
+  - economy_pipe_8:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-green-8-ft-6eg8"
+    length: 8
+  - economy_pipe_10:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-10-ft-red-6er10"
+    length: 10
+  - economy_pipe_12:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6bar-economy-tube-gate-red-12-ft-6er12"
+    length: 12
+  - economy_pipe_14:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-red-14-ft-6er14"
+    length: 14
+  - economy_pipe_16:
+    email_string: "Economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-bar-economy-tube-gate-green-16-ft-6eg16"
+    length: 16
+  # Galvanized pipe gate
+  - galvanized_pipe_4:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-gate-tube-4-ft-1-5-8-in-galvanized"
+    length: 4
+  - galvanized_pipe_6:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-gate-tube-6-ft-1-5-8-in-galvanized"
+    length: 6
+  - galvanized_pipe_8:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-gate-tube-8-ft-1-5-8-in-galvanized"
+    length: 8
+  - galvanized_pipe_10:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-gate-tube-8-ft-1-5-8-in-galvanized"
+    length: 10
+  - galvanized_pipe_12:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-12-ft-tube-gate"
+    length: 12
+  - galvanized_pipe_14:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-14-ft-tube-gate-gray"
+    length: 14
+  - galvanized_pipe_16:
+    email_string: "Galvanized economy pipe gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-16-ft-tube-gate-gray"
+    length: 16
+  # Wire-filled economy gate
+  - wire_filled_4:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-wirefilled-gate-black-4-ft-2-in-x-4-in-mesh-wfgbl4"
+    length: 4
+  - wire_filled_6:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-6-ft-wire-gate-2-in-x-4-in-grid-spacing-green-wfgg6"
+    length: 6
+  - wire_filled_8:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-in-x-4-in-mesh-wirefilled-gate-black-8-ft-wfgbl8"
+    length: 8
+  - wire_filled_10:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-x-4-wirefilled-gate-black-10-wfgbl10"
+    length: 10
+  - wire_filled_12:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-x-4-wirefilled-gate-black-12-wfgbl12"
+    length: 12
+  - wire_filled_14:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-x-4-wirefilled-gate-black-14-wfgbl14"
+    length: 14
+  - wire_filled_16:
+    email_string: "Wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-16-ft-wire-gate-2-in-x-4-in-grid-spacing-green-wfgg16"
+    length: 16
+  # Galvanized wire-filled economy gate
+  - galvanized_wire_filled_4:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-countyline-4-ft-square-corner-wire-filled-gate-galvanized-wgsc4cl"
+    length: 4
+  - galvanized_wire_filled_6:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-countyline-6-ft-square-corner-wire-filled-gate-galvanized-wgsc6cl"
+    length: 6
+  - galvanized_wire_filled_8:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-galvanized-mesh-gate-8-ft"
+    length: 8
+  - galvanized_wire_filled_10:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-x-4-wirefilled-gate-black-10-wfgbl10"
+    length: 10
+  - galvanized_wire_filled_12:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-countyline-12-ft-square-corner-wire-filled-gate-galvanized-wgsc12cl"
+    length: 12
+  - galvanized_wire_filled_14:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-14-ft-galvanized-mesh-gate"
+    length: 14
+  - galvanized_wire_filled_16:
+    email_string: "Galvanized wire-filled economy gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/countyline-16-ft-galvanized-mesh-gate"
+    length: 16
+  # Bull gate
+  - bull_4:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-4-ft-green-rgb4t"
+    length: 4
+  - bull_6:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-6-ft-green-rgb6t"
+    length: 6
+  - bull_8:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-8-ft-green-rgb8t"
+    length: 8
+  - bull_10:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-10-ft-red-rrb10"
+    length: 10
+  - bull_12:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-12blue-rbb12"
+    length: 12
+  - bull_14:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-14-ft-red-rrb14"
+    length: 14
+  - bull_16:
+    email_string: "Bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-7-bar-heavy-duty-standard-bull-gate-16-ft-blue-rbb16"
+    length: 16
+  # Galvanized bull gate
+  - galvanized_bull4:
+    email_string: "Galvanized bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-in-6-bar-extra-heavy-duty-galvanized-bull-gate-4-ft-2gvg4?cm_vc=-10011"
+    length: 4
+  - galvanized_bull6:
+    email_string: "Galvanized bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-6-bar-extra-heavy-duty-galvanized-bull-gate-6-ft-2gvg6"
+    length: 6
+  - galvanized_bull8:
+    email_string: "Galvanized bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-in-6-bar-extra-heavy-duty-galvanized-bull-gate-8-ft-2gvg8"
+    length: 8
+  - galvanized_bull10:
+    email_string: "Galvanized bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-6-bar-extra-heavy-duty-galvanized-bull-gate-10-ft-2gvg10"
+    length: 10
+  - galvanized_bull12:
+    email_string: "Galvanized bull gate"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/tarter-2-in-6-bar-extra-heavy-duty-galvanized-bull-gate-12-ft-2gvg12"
+    length: 12
+  # Rough stock gate
+  - rough_stock4:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 4
+  - rough_stock6:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 6
+  - rough_stock8:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 8
+  - rough_stock10:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 10
+  - rough_stock12:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 12
+  - rough_stock14:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 14
+  - rough_stock16:
+    email_string: "Rough stock gate"
+    material:
+      - "https://www.priefert.com/products/gates-and-panels/rough-stock-gates"
+    length: 16
+  # Custom wood gate
+  - custom_wood_4:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 4
+  - custom_wood_6:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 6
+  - custom_wood_8:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 8
+  - custom_wood_10:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 10
+  - custom_wood_12:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 12
+  - custom_wood_14:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 14
+  - custom_wood_16:
+    email_string: "Custom wood gate"
+    material:
+      - "https://www.mccoys.com/shop/p/01080000/2-x-6-x-8-actual-1-12x5-12-2-prime-ground-contact-treated-pine"
+    length: 16
+  # Custom pipe gate
+  - custom_pipe_4:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 4
+  - custom_pipe_6:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 6
+  - custom_pipe_8:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 8
+  - custom_pipe_10:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 10
+  - custom_pipe_12:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 12
+  - custom_pipe_14:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 14
+  - custom_pipe_16:
+    email_string: "Custom pipe gate"
+    material:
+      - "John Stewart - drill stem"
+    length: 16
+
+gate_openers:
+  material:
+    - "https://www.tractorsupply.com/tsc/product/ghost-controls-single-architectural-series-gate-opener-dtp1"
+    - "https://www.tractorsupply.com/tsc/product/ghost-controls-solar-panel-30w-with-brackets-no-post-ax30w"
+    - "https://www.tractorsupply.com/tsc/product/universal-power-group-12v-8ah-f1-agm-battery-45955"
+
+hotwire:
+  material:
+    - name: hotwire
+      url: "https://www.tractorsupply.com/tsc/product/bekaert-wire-high-tensile-125g-170k-psi-1320-ft-120656"
+      length: 1320
+    - name: insulators
+      url: "https://www.tractorsupply.com/tsc/product/american-farmworks-yellow-snap-on-5-in-extender-t-post-insulators"
+      qty: 25
+    - name: solar_panel
+      url: "https://www.tractorsupply.com/tsc/product/american-farmworks-5-mile-solar-fence-energizer-esp5mn-afw"
+    - name: ground_rod
+      url: "https://www.tractorsupply.com/tsc/product/american-farmworks-6-ft-copper-coated-ground-rod"
+    - name: ground_rod_clamp
+      url: "https://www.tractorsupply.com/tsc/product/american-farmworks-aluminum-ground-rod-clamp"
+
+paint:
+  material:
+    - name: "https://www.tractorsupply.com/tsc/product/gardner-gibson-fence-post-black-beauty-asphalt-fence-paint-475-gal"
+      feet: 600
+
+fencing_equipment:
+  equipment:
+    - "{{ circlejh_equipment.truck }}"
+    - "{{ circlejh_equipment.trailer.tool }}"
+    - "{{ circlejh_equipment.trailer.equipment }}"
+    - "{{ circlejh_equipment.skid_steer }}"
+    - "{{ circlejh_equipment.post_pounder }}"
+    - "{{ circlejh_equipment.side_by_side }}"
+
+pipe_fence:
+  equipment:
+    - "{{ circlejh_equipment.welding_machine }}"
+
+clear_fence_line:
+  equipment: "{{ circlejh_equipment.hydro_mulcher }}"
+
+replace_existing:
+  equipment: "{{ circlejh_equipment.mini_excavator }}"
+
+hardware:
+  fence_nails:
+    url: "https://a.co/d/eCRMmgO"
+    qty: 1000
+  t_post_clips:
+    url: "https://www.tractorsupply.com/tsc/product/fence-fork-t-post-clips"
+    qty: 100
+
+posts:
+  - pipe:
+    email_string: "Pipe"
+    material:
+      - "Drill stem - John Stewart"
+  - wood_4:
+    email_string: "Round wood posts"
+    material:
+      - "https://www.mccoys.com/shop/p/06011001/5-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 4
+  - wood_5:
+    email_string: "Round wood posts"
+    material:
+      - "https://www.mccoys.com/shop/p/06011001/5-x-8-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 5
+  - wood_6:
+    email_string: "Round wood posts"
+    material:
+      - "https://www.mccoys.com/shop/p/060118/5-x-12-southern-pine-no-grade-pressure-treated-cca-round-post"
+    height: 6
+  - cedar_4:
+    email_string: "Bark-on cedar posts"
+    material:
+      - "https://www.mccoys.com/shop/p/060157/8x6-7-bark-on-cedar-round-post"
+  - t_post_4:
+    email_string: "T-posts"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/studded-t-post-7-ft-125-lb-per-foot"
+    height: 4
+  - t_post_5:
+    email_string: "T-posts"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/franklin-industries-studded-t-post-8-ft125-lb-per-foot"
+    height: 5
+  - t_post_6:
+    email_string: "T-posts"
+    material:
+      - "https://www.tractorsupply.com/tsc/product/studded-t-post-10-ft-133-lb-lb-per-foot"
+    height: 6
+
+
+labor:
+  - name: Foreman
+    hourly_cost: "{{ labor.foreman }}"
+  - name: Helper
+    hourly_cost: "{{ labor.helper }}"
+...

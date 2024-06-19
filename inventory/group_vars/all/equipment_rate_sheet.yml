@@ -27,23 +27,41 @@ circlejh_equipment:
       acres_per_hour: 8
       labor_type: operator
   truck:
+    name: "Truck"
     cost: 100
     sales_tax: 0
   trailer:
     equipment:
+      name: "Equipment trailer"
       cost: 50
       sales_tax: 0
     tool:
+      name: "Tool trailer"
       cost: 100
       sales_tax: 0
   skid_steer:
+    name: "Skid steer"
     cost: 300
     sales_tax: "{{ sales_tax }}"
   post_pounder:
+    name: "Post pounder"
     cost: 200
     sales_tax: "{{ sales_tax }}"
   side_by_side:
+    name: "Side by side"
     cost: 50
+    sales_tax: 0
+  hydro_mulcher:
+    name: "Hydro-mulcher"
+    cost: 1000
+    sales_tax: "{{ sales_tax }}"
+  mini_excavator:
+    name: "Mini-excavator"
+    cost: 275
+    sales_tax: 0
+  welding_machine:
+    name: "Welding machine"
+    cost: 100
     sales_tax: 0
 
 ...

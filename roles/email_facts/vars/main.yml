@@ -40,9 +40,6 @@ string_to_dict:
   - string: "Fence height in feet: "
     key: fence_height
     type: int
-  - string: "Gate height in feet: "
-    key: gate_height
-    type: int
   - string: "Fence post type: "
     key: fence_post_type
     type: string
