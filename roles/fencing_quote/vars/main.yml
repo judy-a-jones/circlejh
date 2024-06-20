@@ -505,10 +505,24 @@ hardware:
     qty: 100
 
 posts:
-  - pipe:
+  - pipe_4:
     email_string: "Pipe"
     material:
       - "Drill stem - John Stewart"
+    
+    height: 4  
+  - pipe_5:
+    email_string: "Pipe"
+    material:
+      - "Drill stem - John Stewart"
+    
+    height: 5  
+  - pipe_6:
+    email_string: "Pipe"
+    material:
+      - "Drill stem - John Stewart"
+    
+    height: 6  
   - wood_4:
     email_string: "Round wood posts"
     material:
