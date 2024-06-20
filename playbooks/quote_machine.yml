@@ -14,7 +14,7 @@
           - ansible_eda.event.meta.headers.Host == webhook_host
           - ansible_eda.event.meta.headers["x-from"] == webhook_x_from
           - ansible_eda.event.meta.source.name == webhook_source
-          - ansible_eda.event.payload.from == webhook_payload_from
+          - ansible_eda.event.payload.from|lower == webhook_payload_from|lower
 
     - name: "Get email info for {{ emailId }}"
       vars:
