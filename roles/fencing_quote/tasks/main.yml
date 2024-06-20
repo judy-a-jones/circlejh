@@ -134,7 +134,7 @@
       {%- if email_facts.paint == "Yes" -%}
         {%- for item in paint.material -%}
           {%- set _ = material.append({
-            "name": item.name,
+            "name": item.url,
             "qty": email_facts.fence_length / item.feet
           }) -%}
         {%- endfor -%}

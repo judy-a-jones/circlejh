@@ -474,7 +474,7 @@ hotwire:
 
 paint:
   material:
-    - name: "https://www.tractorsupply.com/tsc/product/gardner-gibson-fence-post-black-beauty-asphalt-fence-paint-475-gal"
+    - url: "https://www.tractorsupply.com/tsc/product/gardner-gibson-fence-post-black-beauty-asphalt-fence-paint-475-gal"
       feet: 600
 
 fencing_equipment:
@@ -509,19 +509,16 @@ posts:
     email_string: "Pipe"
     material:
       - "Drill stem - John Stewart"
-    
     height: 4  
   - pipe_5:
     email_string: "Pipe"
     material:
       - "Drill stem - John Stewart"
-    
     height: 5  
   - pipe_6:
     email_string: "Pipe"
     material:
       - "Drill stem - John Stewart"
-    
     height: 6  
   - wood_4:
     email_string: "Round wood posts"
@@ -542,6 +539,7 @@ posts:
     email_string: "Bark-on cedar posts"
     material:
       - "https://www.mccoys.com/shop/p/060157/8x6-7-bark-on-cedar-round-post"
+    height: 4
   - t_post_4:
     email_string: "T-posts"
     material:
