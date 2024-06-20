@@ -490,11 +490,9 @@ pipe_fence:
   equipment:
     - "{{ circlejh_equipment.welding_machine }}"
 
-clear_fence_line:
-  equipment: "{{ circlejh_equipment.hydro_mulcher }}"
+clear_fence_line: "{{ circlejh_equipment.hydro_mulcher }}"
 
-replace_existing:
-  equipment: "{{ circlejh_equipment.mini_excavator }}"
+replace_existing: "{{ circlejh_equipment.mini_excavator }}"
 
 hardware:
   fence_nails:

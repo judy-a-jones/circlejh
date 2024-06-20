@@ -19,8 +19,8 @@ Timeline:,{{ email_facts.timeline }},,,,,
 ,,,,,,
 Materials:,,,,,,
 Item:,Cost:,Sales Tax:,Burden:,Margin:,QTY:,Total:
-{%- set materials_starting_cell = 23 -%}
-{%- for item in materials -%}
+{% set materials_starting_cell = 22 %}
+{% for item in materials %}
 {% set cell_number = materials_starting_cell|int + loop.index0 %}
 {{ item.name }},,=F3*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),{{ item.qty }},=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
@@ -29,9 +29,9 @@ Total materials:,,,,,,=SUM(G{{ materials_starting_cell }}:G{{ materials_ending_c
 ,,,,,,
 Equipment:,,,,,,
 Item:,Cost per day:,Sales Tax:,Burden:,Margin:,Days:,Total:
-{%- set equipment_starting_cell = materials_ending_cell + 5 -%}
-{%- for item in equipment -%}
-{%- set cell_number = equipment_starting_cell|int + loop.index0 %}
+{% set equipment_starting_cell = materials_ending_cell + 5 %}
+{% for item in equipment %}
+{% set cell_number = equipment_starting_cell|int + loop.index0 %}
 {{ item.name }},{{ item.cost }},={{ item.sales_tax }}*B{{ cell_number }},=F1*B{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
 {% set equipment_ending_cell = equipment_starting_cell + equipment|length - 1 %}
@@ -39,14 +39,13 @@ Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell }}:G{{ equipment_ending_c
 ,,,,,,
 Labor:,,,,,,
 Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
-{%- set labor_starting_cell = equipment_ending_cell + 5 -%}
-{%- for item in fencing_labor -%}
-{%- set cell_number = labor_starting_cell|int + loop.index0 %}
+{% set labor_starting_cell = equipment_ending_cell + 5 %}
+{% for item in fencing_labor %}
+{% set cell_number = labor_starting_cell|int + loop.index0 %}
 {{ item.name }},{{ item.hourly_cost }},={{ working_day_hours }}*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
 {% endfor %}
 {% set labor_ending_cell = labor_starting_cell + fencing_labor|length - 1 %}
 Total labor:,,,,,,=SUM(G{{ labor_starting_cell }}:G{{ labor_ending_cell }})
 ,,,,,,
 ,,,,Grand total:,=G{{ materials_ending_cell + 1 }}+G{{ equipment_ending_cell + 1 }}+G{{ labor_ending_cell + 1 }},
-,,,,Grand total/ft:,=F{{ labor_ending_cell + 4 }}/B6,
-
+,,,,Grand total/ft:,=F{{ labor_ending_cell + 3 }}/B6,
