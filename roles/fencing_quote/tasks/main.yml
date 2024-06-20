@@ -17,12 +17,12 @@
             {%- if item.name == "hotwire" -%}
               {%- set _ = material.append({
                 "name": item.url,
-                "qty": (email_facts.fence_length * (email_facts.fence_height - 1)) / item.length
+                "qty": ((email_facts.fence_length * (email_facts.fence_height - 1)) / item.length)|float
                }) -%}
             {%- elif item.name == "insulators" -%}
               {%- set _ = material.append({
                 "name": item.url,
-                "qty": (email_facts.fence_length / distance_between_posts) / item.qty
+                "qty": ((email_facts.fence_length / distance_between_posts) / item.qty)|float
               }) -%}
             {%- elif ("ground" in item.name) or
                      ("solar" in item.name) -%}
@@ -150,14 +150,10 @@
         {%- endfor -%}
       {%- endif -%}
       {%- if "Yes" in email_facts.fence_line_clear -%} 
-        {%- for item in clear_fence_line.equipment -%}
-          {%- set _ = equipment.append(item) -%}
-        {%- endfor -%}
+        {%- set _ = equipment.append(clear_fence_line) -%}
       {%- endif -%}
-      {%- if "Replace" in email_facts.new_or_replacement -%} 
-        {%- for item in clear_fence_line.equipment -%}
-          {%- set _ = equipment.append(item) -%}
-        {%- endfor -%}
+      {%- if "Replacing" in email_facts.new_or_replacement -%} 
+        {%- set _ = equipment.append(replace_existing) -%}
       {%- endif -%}
       {{ equipment }}
   template:
