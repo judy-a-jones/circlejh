@@ -67,4 +67,29 @@ string_to_dict:
   - string: "If the fence needs painted, what color?: "
     key: paint_color
     type: string
+  - string: "Driveway width in feet: "
+    key: driveway_width
+    type: int
+  - string: "Driveway length in feet: "
+    key: driveway_length
+    type: int
+  - string: "Driveway material: "
+    key: driveway_material
+    type: string
+  - string: "Is this a new driveway or a driveway repair?: "
+    key: new_or_repair
+    type: string
+  - string: "Do you need a cattle guard installed in your driveway?: "
+    key: cattleguard
+    type: string
+  - string: "Width of concrete area in feet: "
+    key: concrete_width
+    type: int
+  - string: "Length of concrete area in feet: "
+    key: concrete_length
+    type: int
+  - string: "Depth of concrete in inches: "
+    key: concrete_height
+    type: int
+
 ...

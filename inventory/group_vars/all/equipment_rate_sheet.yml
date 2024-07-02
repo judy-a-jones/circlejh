@@ -63,5 +63,13 @@ circlejh_equipment:
     name: "Welding machine"
     cost: 100
     sales_tax: 0
+  dozer:
+    name: "John Deere 450J/450K LGP Open Cab Dozer"
+    cost: 650
+    sales_tax: "{{ sales_tax }}"
+  concrete_mixer:
+    name: "9 Cubic Foot Gas Concrete Mixer"
+    cost: 95
+    sales_tax: "{{ sales_tax }}"
 
 ...

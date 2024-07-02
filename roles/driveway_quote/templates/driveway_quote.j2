@@ -1,0 +1,38 @@
+Name:,{{ email_facts.name }},,,Burden:,{{ burden }},
+Phone: ,{{ email_facts.phone }},,,Margin:,{{ margin }},
+Zip:,{{ email_facts.zip }},,,Sales Tax:,{{ sales_tax }},
+Driveway length:,{{ email_facts.driveway_length|default() }},,,,,
+Driveway width:,{{ email_facts.driveway_width|default() }},,,Number of days:,{{ project.days }},
+Driveway material:,{{ email_facts.driveway_material|default() }},,,Total square yards:,{{ total_square_yards }},
+New driveway or repair?,{{ email_facts.new_or_repair|default() }},,,Total cubic yards:,{{ total_cubic_yards }},
+Cattleguard?:,{{ email_facts.gate_type|default() }},,,,,
+Timeline:,{{ email_facts.timeline|default() }},,,,,
+,,,,,,
+Materials:,,,,,,
+Item:,Cost:,Sales Tax:,Burden:,Margin:,QTY:,Total:
+{% set material_cell_number = 13 %}
+{{ material }},,=F3*B{{ material_cell_number }},=F1*C{{ material_cell_number }},=F2*(D{{ material_cell_number }}+C{{ material_cell_number }}),unknown,=F{{ material_cell_number }}*SUM(B{{ material_cell_number }}:E{{ material_cell_number }})
+Total materials:,,,,,,=G{{ material_cell_number }}
+,,,,,,
+Equipment:,,,,,,
+Item:,Cost per day:,Sales Tax:,Burden:,Margin:,Days:,Total:
+{% set equipment_starting_cell = material_cell_number + 5 %}
+{% for item in equipment %}
+{% set cell_number = equipment_starting_cell|int + loop.index0 %}
+{{ item.name }},{{ item.cost }},={{ item.sales_tax }}*B{{ cell_number }},=F1*B{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
+{% endfor %}
+{% set equipment_ending_cell = equipment_starting_cell + equipment|length - 1 %}
+Total equipment:,,,,,,=SUM(G{{ equipment_starting_cell }}:G{{ equipment_ending_cell }})
+,,,,,,
+Labor:,,,,,,
+Personnel:,Cost per hour:,Cost per day:,Burden:,Margin:,Days:,Total:
+{% set labor_starting_cell = equipment_ending_cell + 5 %}
+{% for item in driveway_labor %}
+{% set cell_number = labor_starting_cell|int + loop.index0 %}
+{{ item.name }},{{ item.hourly_cost }},={{ working_day_hours }}*B{{ cell_number }},=F1*C{{ cell_number }},=F2*(D{{ cell_number }}+C{{ cell_number }}),=F5,=F{{ cell_number }}*SUM(B{{ cell_number }}:E{{ cell_number }})
+{% endfor %}
+{% set labor_ending_cell = labor_starting_cell + driveway_labor|length - 1 %}
+Total labor:,,,,,,=SUM(G{{ labor_starting_cell }}:G{{ labor_ending_cell }})
+,,,,,,
+,,,,Grand total:,=G{{ material_cell_number + 1 }}+G{{ equipment_ending_cell + 1 }}+G{{ labor_ending_cell + 1 }},
+,,,,Grand total/ft:,=F{{ labor_ending_cell + 3 }}/B6,

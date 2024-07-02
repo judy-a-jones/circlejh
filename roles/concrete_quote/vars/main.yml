@@ -1,0 +1,21 @@
+---
+
+concrete_equipment:
+  - "{{ circlejh_equipment.truck }}"
+  - "{{ circlejh_equipment.trailer.tool }}"
+  - "{{ circlejh_equipment.concrete_mixer }}"
+
+concrete_labor:
+  - name: "Foreman"
+    hourly_cost: "{{ labor.foreman }}"
+  - name: "Helper"
+    hourly_cost: "{{ labor.helper }}"
+
+bags_per_day: 100
+
+concrete_material:
+  - "https://www.tractorsupply.com/tsc/product/quikrete-concrete-mix-60-lb"
+  - "https://www.mccoys.com/shop/p/010109/2-x-4-x-16-southern-pine-no-2-kiln-dried-surfaced-on-4-sides"
+  - "https://www.mccoys.com/shop/p/12135426/fas-n-tite-42606-screw-10-thread-3-in-l-phillips-drive-50-pk"
+
+...

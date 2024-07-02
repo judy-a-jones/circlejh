@@ -36,6 +36,23 @@
       import_role:
         name: "{{ working_dir }}/roles/fencing_quote"
 
+    - name: "Make driveway quote for {{ email_facts.name }}"
+      when:
+        - email_facts.driveway_length is defined
+        - email_facts.driveway_width is defined
+      import_role:
+        name: "{{ working_dir }}/roles/driveway_quote"
+
+    - name: "Make concrete quote for {{ email_facts.name }}"
+      when:
+        - email_facts.concrete_length is defined
+        - email_facts.concrete_width is defined
+      import_role:
+        name: "{{ working_dir }}/roles/concrete_quote"
+
+    - name: "Send {{ quote_path }} to slack"
+      import_role:
+        name: "{{ working_dir }}/roles/slack_update"
     - name: "Send {{ quote_path }} to slack"
       import_role:
         name: "{{ working_dir }}/roles/slack_update"

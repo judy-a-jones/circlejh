@@ -1,0 +1,31 @@
+---
+
+- name: "Make driveway quote csv at {{ quote_path }}"
+  vars:
+    total_square_yards: (email_facts.driveway_length * email_facts.driveway_width)/9
+    total_cubic_yards: ((standard_driveway_depth_inches / 12) * email_facts.driveway_length * email_facts.driveway_width)/27
+    project:
+      days: |-
+        {%- set days = total_square_yards|int / sq_yards_per_day -%}
+        {%- if email_facts.cattleguard == "Yes" -%}
+          {{ days + 1 }}
+        {%- else -%}
+          {{ days }}
+        {%- endif -%}
+    equipment: |-
+      {%- set equipment = driveway_equipment -%}
+      {%- if email_facts.cattleguard == "Yes" -%}
+        {%- set _ = equipment.append(cattleguard_equipment) -%}
+      {%- endif -%}
+      {{ equipment }}
+    material: |-
+      {%- for type in driveway_materials -%}
+        {%- if email_facts.driveway_material == type.email_string -%}
+      {{ type.material }}
+        {%- endif -%}
+      {%- endfor -%}
+  template:
+    src: "driveway_quote.j2"
+    dest: "{{ quote_path }}"
+
+...

@@ -1,0 +1,47 @@
+---
+
+driveway_equipment:
+  - "{{ circlejh_equipment.truck }}"
+  - "{{ circlejh_equipment.trailer.equipment }}"
+  - "{{ circlejh_equipment.skid_steer }}"
+  - "{{ circlejh_equipment.dozer }}"
+
+cattleguard_equipment: "{{ circlejh_equipment.mini_excavator }}"
+
+driveway_labor:
+  - name: "Operator"
+    hourly_cost: "{{ labor.operator }}"
+  - name: "Helper"
+    hourly_cost: "{{ labor.helper }}"
+
+sq_yards_per_day: 156
+
+standard_driveway_depth_inches: 4
+
+driveway_materials:
+  - pea_gravel:
+    email_string: '3/8" pea gravel'
+    material: '3/8" pea gravel - Western Rock - (936) 931-3804'
+  - milled_asphault:
+    email_string: "Milled asphault"
+    material: "Milled asphault - Waller county asphault - (979) 826-7075"
+  - crushed_asphault:
+    email_string: "Crushed asphault"
+    material: "Waller county asphault - (979) 826-7075"
+  - concrete_washout:
+    email_string: "Concrete wash out"
+    material: "Concrete wash out - Joey Williams - (979) 481-0759"
+  - post_oak:
+    email_string: 'Post oak'
+    material: "Post oak - Western Rock - (936) 931-3804"
+  - caliche:
+    email_string: 'Caliche'
+    material: "Caliche - Western Rock - (936) 931-3804"
+  - limestone:
+    email_string: 'Limestone'
+    material: "Limestone - Western Rock - (936) 931-3804"
+  - decomposed_granite:
+    email_string: 'Decomposed granite'
+    material: "Decomposed granite - Western Rock - (936) 931-3804"
+
+...
