@@ -1,15 +1,6 @@
 ---
 
 - name: "Make concrete quote csv at {{ quote_path }}"
-  vars:
-    total_cubic_feet: "{{ email_facts.concrete_length * email_facts.concrete_width * (email_facts.concrete_height / 12) }}"
-    total_bags: "{{ (total_cubic_feet * 3)|float }}"
-    total_side_length: "{{ (2 * email_facts.concrete_length) + (2 * email_facts.concrete_width) }}"
-    project:
-      days: "{{ total_bags|float / bags_per_day|float }}"
-    labor: "{{ concrete_labor }}"
-    material: "{{ concrete_material }}"
-    equipment: "{{ concrete_equipment }}"
   template:
     src: "concrete_quote.j2"
     dest: "{{ quote_path }}"
